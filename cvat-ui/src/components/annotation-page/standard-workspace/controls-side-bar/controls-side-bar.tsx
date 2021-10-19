@@ -26,6 +26,7 @@ import SetupTagControl, { Props as SetupTagControlProps } from './setup-tag-cont
 import MergeControl, { Props as MergeControlProps } from './merge-control';
 import GroupControl, { Props as GroupControlProps } from './group-control';
 import SplitControl, { Props as SplitControlProps } from './split-control';
+import TestData from './get-data';
 
 interface Props {
     canvasInstance: Canvas;
@@ -219,7 +220,11 @@ export default function ControlsSideBarComponent(props: Props): JSX.Element {
             <ObservedResizeControl canvasInstance={canvasInstance} activeControl={activeControl} />
 
             <hr />
-            <ObservedToolsControl />
+            <TestData
+                canvasInstance={canvasInstance}
+                isDrawing={activeControl === ActiveControl.DRAW_RECTANGLE}
+                disabled={!labels.length}
+            />
             <ObservedOpenCVControl />
             <ObservedDrawRectangleControl
                 canvasInstance={canvasInstance}
@@ -247,7 +252,6 @@ export default function ControlsSideBarComponent(props: Props): JSX.Element {
                 disabled={!labels.length}
             />
             <ObservedSetupTagControl canvasInstance={canvasInstance} isDrawing={false} disabled={!labels.length} />
-
             <hr />
 
             <ObservedMergeControl
